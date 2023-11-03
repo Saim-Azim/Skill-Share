@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+        *{
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #blogContainer {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f2f2f2;
+        }
+
+        #blogTitle {
+            font-size: 24px;
+            margin-bottom: 80px;
+            text-align: center;
+        }
+
+        #blogContent {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        #blogAuthor, #blogDate {
+            font-style: italic;
+            color: #888;
+            margin-bottom: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4b8ef1;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 10px;
+            border: white;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #4b8ef1;
+        }
+
+        #requestForm, #messageForm {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f2f2f2;
+            display: none;
+        }
+
+        input[type="text"], textarea {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #submitRequestButton, #cancelRequestButton, #sendButton, #cancelButton {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4b8ef1;
+            border: white;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+
+        #submitRequestButton:hover, #cancelRequestButton:hover, #sendButton:hover, #cancelButton:hover {
+            background-color: #4b8ef1;
+        }
+    </style>
+</head>
+<body>
+    <h1>View Blog</h1>
+
+    <div id="blogContainer">
+        <h2 id="blogTitle"></h2>
+        <p id="blogContent"></p>
+        <p id="blogAuthor"></p>
+        <p id="blogDate"></p>
+    </div>
+
+    <!-- try| -->
+    <div id="button" style="text-align: center;">
+        <button id="requestButton">Request</button>
+
+    <div id="requestForm">
+        <input type="text" id="titleInput" placeholder="Enter title" readonly>
+        <input type="text" id="receiverInput" placeholder="Enter receiver" readonly>
+        <input type="text" id="dateInput" placeholder="Select date">
+        <input type="text" id="timeInput" placeholder="Select time">
+        <button id="submitRequestButton">Send Request</button>
+        <button id="cancelRequestButton">Cancel</button>
+    </div>
+
+    <button id="messageButton">Message</button>
+
+    <div id="messageForm">
+        <input type="text" id="messageInput" placeholder="Write your message">
+        <button id="sendButton">Send</button>
+        <button id="cancelButton">Cancel</button>
+    </div>
+    </div>
+    
+
+    <script>
+        // Function to get the value of a specific parameter from the URL
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        // Get the blog data from the query parameters
+        var title = getParameterByName('title');
+        var content = getParameterByName('content');
+        var author = getParameterByName('author');
+        var date = getParameterByName('date');
+
+        // Set the blog data in the HTML elements
+        document.getElementById('blogTitle').innerText = title;
+        document.getElementById('blogContent').innerText = content;
+        document.getElementById('blogAuthor').innerText = 'Author: ' + author;
+        document.getElementById('blogDate').innerText = 'Posted Date: ' + date;
+
+        // Show the message form when the message button is clicked
+        document.getElementById('messageButton').addEventListener('click', function() {
+            document.getElementById('messageForm').style.display = 'block';
+        });
+
+        // Send the message when the send button is clicked
+        document.getElementById('sendButton').addEventListener('click', function() {
+            var message = document.getElementById('messageInput').value;
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'savemessage.py', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log('Message sent successfully!');
+                    var response = xhr.responseText;
+                    showMessage(response);
+                }
+            };
+            var data = 'sender=' + encodeURIComponent(uname) + '&recipient=' + encodeURIComponent(author) + '&message=' + encodeURIComponent(message);
+            xhr.send(data);
+
+            // Clear the input field after sending the message
+            document.getElementById('messageInput').value = '';
+            // Hide the message form after sending the message
+            document.getElementById('messageForm').style.display = 'none';
+        });
+
+        // Function to display the sent message for a certain duration and reset button position
+        // Function to display the sent message for a certain duration
+        function showMessage(message) {
+            var messageContainer = document.createElement('div');
+            messageContainer.innerHTML = message;
+            var messageButton = document.getElementById('messageButton');
+            messageButton.insertAdjacentElement('afterend', messageContainer);
+
+            // Clear the message after 20 seconds
+            setTimeout(function() {
+                messageContainer.style.display = 'none';
+                messageContainer.remove();
+            }, 20000);
+        }
+
+        // Cancel the message when the cancel button is clicked
+        document.getElementById('cancelButton').addEventListener('click', function() {
+            // Clear the input field
+            document.getElementById('messageInput').value = '';
+            // Hide the message form
+            document.getElementById('messageForm').style.display = 'none';
+        });
+
+        // Show the request form when the request button is clicked
+        document.getElementById('requestButton').addEventListener('click', function() {
+            document.getElementById('requestForm').style.display = 'block';
+        });
+
+        // Initialize Flatpickr for date and time inputs
+        flatpickr('#dateInput', {
+            enableTime: false,
+            minDate: 'today',
+            dateFormat: 'Y-m-d',
+        });
+
+        flatpickr('#timeInput', {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: 'H:i',
+        });
+
+        // Set the fetched data in the input boxes
+        document.getElementById('titleInput').value = title;
+        document.getElementById('receiverInput').value = author;
+
+        // Send the request when the submit request button is clicked
+        document.getElementById('submitRequestButton').addEventListener('click', function() {
+            var title = document.getElementById('titleInput').value;
+            var receiver = document.getElementById('receiverInput').value;
+            var date = document.getElementById('dateInput').value;
+            var time = document.getElementById('timeInput').value;
+
+            // Send the request using AJAX to the saverequest.py script
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'saverequest.py', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log('Request sent successfully!');
+                    var response = xhr.responseText;
+                    showMessage(response);
+                    if (response === "Request already sent!") {
+                        document.getElementById('requestForm').style.display = 'none';
+                    }
+                }
+            };
+            var data = 'title=' + encodeURIComponent(title) + '&receiver=' + encodeURIComponent(receiver) + '&e_date=' + encodeURIComponent(date) + '&e_time=' + encodeURIComponent(time) + '&sender=' + encodeURIComponent(uname);
+            xhr.send(data);
+
+            // Clear the input fields after sending the request
+            document.getElementById('titleInput').value = '';
+            document.getElementById('receiverInput').value = '';
+            document.getElementById('dateInput').value = '';
+            document.getElementById('timeInput').value = '';
+            // Hide the request form after sending the request
+            document.getElementById('requestForm').style.display = 'none';
+        });
+
+        // Function to display a message below the request button
+        function showMessage(message) {
+            var messageContainer = document.createElement('div');
+            messageContainer.innerText = message;
+            var requestButton = document.getElementById('requestButton');
+            requestButton.parentNode.insertBefore(messageContainer, requestButton.nextSibling);
+
+            // Clear the message after 5 seconds
+            setTimeout(function() {
+                messageContainer.parentNode.removeChild(messageContainer);
+            }, 2000);
+        }
+
+        // Cancel the request when the cancel request button is clicked
+        document.getElementById('cancelRequestButton').addEventListener('click', function() {
+            // Clear the input fields
+            document.getElementById('titleInput').value = '';
+            document.getElementById('receiverInput').value = '';
+            document.getElementById('dateInput').value = '';
+            document.getElementById('timeInput').value = '';
+            // Hide the request form
+            document.getElementById('requestForm').style.display = 'none';
+        });
+
+        // Get the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Extract the uname value from the URL
+        const uname = urlParams.get('uname');
+
+        // Set the uname value as the value of the input field
+        document.getElementById('uname').value = uname;
+    </script>
+</body>
+</html>

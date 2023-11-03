@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog Form</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+        *{
+            font-family: 'Poppins', sans-serif;
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label, select, textarea, input[type="text"] {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4b8ef1;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            border: white;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #4b8ef1;
+        }
+    </style>
+</head>
+<body>
+ 
+    <h1>Create a New Blog</h1>
+
+    <form action="test.py" method="POST">
+        <label for="title">Blog Title:</label>
+        <input  type="text" id="b_title" name="b_title"  required>
+
+        <label for="b_content">Blog Content:</label>
+        <textarea id="b_content" name="b_content" rows="4" cols="50" required></textarea>
+
+        <label for="b_category">Blog Category:</label>
+        <select id="b_category" name="b_category" required>
+            <option value="">Select a category</option>
+            <option value="technology">Technology</option>
+            <option value="fashion">Fashion</option>
+            <option value="travel">Travel</option>
+            <option value="food">Food</option>
+        </select>
+
+        <label id="welcomeLabel">Name:</label>
+        <input type="text" id="uname" name="uname" readonly required>
+
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        // Get the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // Extract the uname value from the URL
+        const uname = urlParams.get('uname');
+        
+        // Set the uname value as the value of the input field
+        document.getElementById('uname').value = uname;
+      </script>
+</body>
+</html>

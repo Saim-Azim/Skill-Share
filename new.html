@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html>
+     <head>
+          <title>Dashbord</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+          
+
+          <style>
+          
+               /* Google fonts */
+               
+               @import url('https://fonts.googleapis.com/css2?family=Lugrasimo&display=swap');
+               *{
+                    font-family: 'Lugrasimo', cursive;
+                    margin: 0;
+                    padding: 0;
+                    scroll-behavior: smooth;
+                    scroll-padding-top: 2rem;
+                    box-sizing: border-box;
+               }
+
+               :root{
+                    --container-color:#1a1e21;
+                    --second-color:#4b8ef1;
+                    --text-color:#172317;
+                    --bg-color:#;
+               }
+
+               ::selection{
+                    color:var(--bg-clor);
+                    background:var(--second-color);
+               }
+
+               a{
+                    text-decoration: none;
+               }
+
+               li{
+                    list-style: none;
+               }
+
+               img{
+                    width: 100%;
+               }
+
+               section{
+                    padding: 3rem 0 2rem;
+
+               }
+
+               
+               header{
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    z-index: 200;
+               }
+
+               header.shadow{
+                    background: var(--bg-color);
+                    transition: 0.4s;
+               }
+
+               header.shadow .logo{
+                    color:var(--text-color);
+               }
+
+
+               .container{
+                    max-width: 1068px;
+                    margin: auto;
+                    width:100%;
+               }
+               .nav{
+               display: flex;
+               align-items: center;
+               
+               padding: 18px;
+               font-weight: bold;justify-content: space-between;
+               position: sticky;
+               top: 0;
+               
+              
+               
+               }
+
+               .logo{
+                    font-size: 1.5rem;
+                    font-weight: 600;
+                    color:white;
+               }
+
+               .logo span{
+                    color: var(--second-color);
+               }
+
+               .login{
+                    padding: 8px 14px;
+                    text-transform: uppercase;
+                    font-weight: 500;
+                    border-radius: 4px;
+                    background-color: var(--second-color);
+                    color: var(--bg-color);
+               }
+
+               .login:hover{
+               background: hsl(24, 98%, 58%);
+               transition: 0.3s;
+               }
+
+               .welcome-label {
+                    text-align: center;
+                    margin-bottom: 20px;
+               }
+               #usernameLabel {
+                    text-align: center;
+               }
+               
+
+               .panel {
+                    background-color: #f1f1f1;
+                    padding: 20px;
+                    margin: 10px;
+               }
+               
+               .row {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 20px;
+               }
+               
+               .blog-title {
+                    text-align: center;
+                    color: darkblue;
+               }
+
+               .blog-content {
+                    text-align: center;
+               }
+               .button-container {
+                    text-align: center;
+               }
+
+               .button {
+                    display: inline-block;
+                    padding: 8px 16px;
+                    background-color: #4b8ef1;
+                    color: #fff;
+                    text-decoration: none;
+                    border-radius: 4px;
+                    font-weight: bold;
+                    font-size: 14px;
+                    width: 250px;
+               }
+               .blog-container {
+                    margin: 20px;
+               }
+               
+               .button-container-blog {
+                    margin-top: 10px; 
+                    text-align: center;
+               }
+                    
+               .button-blog {
+                    display: inline-block;
+                    padding: 8px 16px;
+                    background-color: #4b8ef1;
+                    color: #fff;
+                    text-decoration: none;
+                    border-radius: 4px;
+                    font-weight: bold;
+                    font-size: 14px;
+               }
+               
+               .blog-content {
+                    margin-bottom: 10px; 
+               }
+               
+               .blog-box {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    height: 100%;
+               }
+               
+               .button-container-blog {
+                    margin-top: auto;
+                    text-align: center;
+                    padding: 10px;
+               }
+               
+          
+               .messaging-container {
+                    display: flex;
+               }
+               
+               .sender-list {
+                    flex: 1;
+               }
+               
+               .message-box {
+                    flex: 2;
+               }
+               
+              .sender-list ul {
+                    list-style: none;
+                    padding: 0;
+               }
+                  
+               .sender-list li {
+                    margin-bottom: 10px;
+               }
+                
+               .sender-list a {
+                    text-decoration: none;
+                    display: flex;
+                    align-items: center;
+                    padding: 10px;
+                    border-radius: 10px;
+                    font-weight: bold;
+                    transition: background-color 0.3s ease;
+                    margin-bottom: 10px; 
+               }
+                  
+               .sender-list a:hover {
+                    background-color: skyblue;
+               }
+                  
+               .sender-list a.active {
+                    background-color: #e4e4e4;
+               }
+                  
+               .sender-list a .sender-avatar {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    background-color: #d4d4d4;
+                    margin-right: 10px;
+               }
+                  
+               .sender-list a .sender-name {
+                    font-weight: bold;
+                    font-size: 14px;
+                    color: #000;
+               }
+                  
+                  
+               .sender-list a:hover .sender-avatar {
+                    background-color: #bfbfbf;
+               }
+                  
+               .sender-list a.active .sender-avatar {
+                    background-color: #a9a9a9;
+               }
+                  
+                 
+               .sender-list {
+                    margin: 10px ; 
+                    max-width: 500px; 
+                    margin-left: 150px;
+               }
+               
+               .message-box {
+                    display: flex;
+                    flex-direction: column;
+                    width: 500px;
+                    height: 400px;
+                    position: relative;
+                    margin: 50px;
+               }
+               
+               .message {
+                    display: inline-block;
+                    padding: 5px 10px;
+                    border-radius: 10px;
+                    margin-bottom: 10px;
+               }
+               
+               .message-left {
+                    align-self: flex-start;
+                    background-color: #e9e9e9;
+                    border: 1px solid #ccc;
+               }
+               
+               .message-right {
+                    align-self: flex-end;
+                    background-color: #DCF8C6;
+                    border: 1px solid #8BC34A;
+               }
+               
+               .message-content {
+                    margin: 0;
+               }
+               
+               .message-time {
+                    font-size: 0.8em;
+                    color: gray;
+               }
+               
+               .reply-container {
+                    position: fixed;
+                    bottom: 0;
+                    
+                    padding: 10px;
+                    z-index: 1;
+                    width: 100%;
+                    margin: 0 auto; 
+                    max-width: 500px; 
+                    margin-bottom: -40px;
+                    margin-right: 350px;
+                    left: 0;
+                    right: 0;
+                    display: flex;
+                    align-items: center;
+               }
+               
+               .reply-container input {
+                    flex: 1;
+                    padding: 8px;
+                    border: none;
+                    border-radius: 25px;
+                    outline: none;
+                    margin-right: 10px;
+                    margin-bottom: 150px;
+                    background-color: skyblue;
+               }
+               
+               .reply-container input::placeholder {
+                    color: var(--second-color);
+               }
+               
+               .reply-container button {
+                    padding: 8px 16px;
+                    background-color: #4b8ef1;
+                    color: #fff;
+                    border: none;
+                    border-radius: 4px;
+                    margin-bottom: 150px;
+                    font-weight: bold;
+               }
+               
+               .reply-container input,
+               .reply-container button {
+                    border: 2px solid darkblue;
+               }
+
+               .column {
+                    width: calc(50% - 20px); 
+                    padding: 10px;
+                    background-color: #fff;
+                    margin: 10px;
+                    position: relative;
+                }
+            
+                .column {
+                    width: calc(50% - 20px);
+                    padding: 10px;
+                    background-color: #fff;
+                    box-shadow: 0 2px 4px #5083ef;
+                    margin: 10px;
+                    position: relative;
+                    overflow: hidden;
+                }
+            
+                .column::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 0;
+                    height: 100%;
+                    border-left: 2px solid darkblue;
+                    animation: borderAnimation 2s linear infinite;
+                    box-sizing: border-box;
+                }
+            
+                @keyframes borderAnimation {
+                    0% {
+                        width: 0;
+                    }
+                    100% {
+                        width: 100%;
+                    }
+                }
+            
+                .column:hover {
+                    background-color: #f2f2f2;
+                }
+
+               .received-events {
+               margin-right: 10px;
+               margin-left: 30px;
+               }
+
+               .sent-events {
+               margin-left: 10px;
+               margin-right: 30px;
+               }
+
+                  
+               
+               .box-container {
+                    display: flex;
+                    justify-content: center; 
+                    flex-wrap: wrap;
+               }
+                  
+               .box {
+                    width: 300px;
+                    padding: 10px;
+                    background-color: #fff;
+                    box-shadow: 0 2px 4px #5083ef;
+                    margin: 10px;
+                    text-align: center; 
+               }
+                  
+               .box-title {
+                    font-size: 16px;
+                    font-weight: bold;
+               }
+                  
+               .box-content {
+                    font-size: 14px;
+                    margin-bottom: 5px;
+               }
+               
+
+               .cancel-button {
+                    display: inline-block;
+                    padding: 8px 16px;
+                    background-color: #ff0000;
+                    color: #fff;
+                    text-decoration: none;
+                    border-radius: 4px;
+                    font-weight: bold;
+                    font-size: 14px;
+                    margin-left: 5px; 
+               }
+               .accept-button {
+                    padding: 8px 16px;
+                    background-color: #4b8ef1;
+                    color: #fff;
+                    text-decoration: none;
+                    border-radius: 4px;
+                    font-weight: bold;
+                    font-size: 14px;
+                    cursor: pointer;
+               }
+                  
+               .accept-button:hover {
+                    background-color: #3a74c5;
+               }
+                  
+               .accept-button:disabled {
+                    background-color: green;
+                    cursor: not-allowed;
+               }
+               /* CSS Animation for moving objects */
+               /* CSS Animation for object animations */
+               @keyframes objectAnimation {
+                    0% {
+                      /* Starting position off the left side */
+                      transform: translateX(-100%);
+                      opacity: 0;
+                    }
+                    50% {
+                      /* Middle position */
+                      transform: translateX(0);
+                      opacity: 0.8;
+                    }
+                    100% {
+                      /* Ending position off the right side */
+                      transform: translateX(100%);
+                      opacity: 0;
+                    }
+               }
+               
+               /* Apply animation to the background elements */
+               .background-animation {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: -1;
+               }
+               
+               .background-object {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 200vw; /* Extend the width to cover both menu and content area */
+                    height: 200vw; /* Extend the height to cover both menu and content area */
+                    border-radius: 50%;
+                    border-color: darkblue;
+                    background: linear-gradient(to right, #1D63FF, skyblue);
+                    opacity: 0.5;
+                    top: -90%;
+                    left: 0;
+                    transform: translateY(-50%);
+                    z-index: -1;
+                    
+               }
+               .nav a::before {
+                    content: '';
+                    position: absolute;
+                    bottom: -2px;
+                    left: 0;
+                    width: 100%;
+                    height: 2px;
+                    background-color: var(--second-color);
+                    transform: scaleX(0);
+                    transform-origin: left;
+                    transition: transform 0.2s ease;
+                    transition-duration: 0.25s;
+                  }
+                  
+                  .nav a:hover {
+                    transform: translateY(-2px);
+                  }
+                  
+                  .nav a:hover::before {
+                    transform: scaleX(1);
+                }
+                     
+          </style>
+     </head>
+     <body>
+          <h2 class="welcome-label">Welcome ,
+          <span id="usernameLabel"></span><br></h2> <!-- Add a span element to display the username -->
+
+          <div class="menu nav container header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+               <!--Logo-->
+          <!--Logo-->
+          <a href="#" class="logo">Skill<span>Share</span></a>
+          <a href="#" onclick="changePage('discover')">Discover</a>
+          <a href="#" onclick="changePage('messaging')">Messaging</a>
+          <a href="#" onclick="changePage('event')">Event</a>
+          <a href="#" onclick="logout()">Logout</a>
+
+          </div>
+          <!--End Of Header-->
+          <div class="background-animation">
+               <div class="background-object"></div>
+          </div>             
+
+          <div id="content">
+          <!-- Content of the selected page will be displayed here -->
+          </div>
+
+          <script>
+               //Function to make an AJAX request
+               function makeAjaxRequest(url, callback) {
+                 var xhttp = new XMLHttpRequest();
+                 xhttp.onreadystatechange = function() {
+                   if (this.readyState === 4 && this.status === 200) {
+                     callback(this.responseText);
+                   }
+                 };
+                 xhttp.open('GET', url, true);
+                 xhttp.send();
+               }
+
+               function logout() {
+                    // Add any necessary logout logic here
+                
+                    // Redirect to the home page
+                    window.location.href = "index.html";
+               }
+             
+               // Function to change the page content based on the selected page
+               function changePage(page) {
+                 var menuItems = document.getElementsByClassName('menu')[0].getElementsByTagName('a');
+                 for (var i = 0; i < menuItems.length; i++) {
+                   menuItems[i].classList.remove('active');
+                 }
+                 document.querySelector('[onclick="changePage(\'' + page + '\')"]').classList.add('active');
+             
+                 var contentDiv = document.getElementById('content');
+                 if (page === 'discover') {
+                   makeAjaxRequest('./new.py', function(response) {
+                     contentDiv.innerHTML = response;
+                   });
+                    }else if (page === 'messaging') {
+                    // Get the username from the URL query parameter
+                    var urlParams = new URLSearchParams(window.location.search);
+                    var username = urlParams.get('uname');
+               
+                    // Make an AJAX request to the Python CGI script to fetch the user's message inbox data
+                    makeAjaxRequest('new2.py?uname=' + username, function(response) {
+                    var messages = JSON.parse(response);
+          
+                    // Merge sender names if sender and user names are the same
+                    var mergedSenders = [];
+                    messages.forEach(function(message) {
+                    if (!mergedSenders.includes(message.sender) && message.sender !== username) {
+                    mergedSenders.push(message.sender);
+                    }
+                    });
+               
+                    // Generate the HTML for the sender list
+                    var senderListHTML = '<div class="sender-list"><ul>';
+                    mergedSenders.forEach(function(sender) {
+                         senderListHTML += '<li><a href="#" onclick="showMessage(\'' + sender + '\')">' + sender + '</a></li>';
+                    });
+                    senderListHTML += '</ul></div>';
+               
+                    // Generate the HTML for the message box
+                    var messageBoxHTML = '<div class="message-box" style="overflow-y: auto; padding-right: 10px;"><div id="messageBox"></div><div id="replyBox"></div></div>';
+               
+                    // Combine the sender list and message box HTML
+                    var html = '<div class="messaging-container">' + senderListHTML + messageBoxHTML + '</div>';
+               
+                    // Update the content div with the generated HTML
+                    contentDiv.innerHTML = html;
+                    });
+                    } else if (page === 'event') {
+                        // Get the username from the URL query parameter
+                         var urlParams = new URLSearchParams(window.location.search);
+                         var username = urlParams.get('uname');
+
+                         // Fetch the received events HTML table using Python CGI
+                         makeAjaxRequest('receivedRequest.py?uname=' + username, function(receivedResponse) {
+                         // Create a new div element for the received events
+                         var receivedEventsDiv = document.createElement('div');
+                         receivedEventsDiv.className = 'column received-events';
+                         receivedEventsDiv.innerHTML = '<h2>Received</h2>' + receivedResponse;
+
+                         // Fetch the sent events HTML table using Python CGI
+                         makeAjaxRequest('sentRequest.py?uname=' + username, function(sentResponse) {
+                              // Create a new div element for the sent events
+                              var sentEventsDiv = document.createElement('div');
+                              sentEventsDiv.className = 'column sent-events';
+                              sentEventsDiv.innerHTML = '<h2>Sent</h2>' + sentResponse;
+
+                              // Create a new row div to contain the columns
+                              var rowDiv = document.createElement('div');
+                              rowDiv.className = 'row';
+
+                              // Append the received events div to the row div
+                              rowDiv.appendChild(receivedEventsDiv);
+
+                              // Append the sent events div to the row div
+                              rowDiv.appendChild(sentEventsDiv);
+
+                              // Update the content div with the row div
+                              contentDiv.innerHTML = ''; // Clear existing content
+                              contentDiv.appendChild(rowDiv);
+                         });
+                         });
+                         
+                    }
+               }
+
+               function acceptEvent(button) {
+                    // Disable the button to make it unclickable
+                    button.disabled = true;
+                  
+                    // Change the button color to green
+                    button.style.backgroundColor = 'green';
+               }
+
+               
+
+               
+
+               // Function to handle the cancel button click event and delete the data from MySQL table
+               function deleteEvent(title) {
+                    // Confirm with the user before deleting the event
+                    if (confirm("Are you sure you want to cancel this event?")) {
+                         // Get the username from the URL query parameter
+                         var urlParams = new URLSearchParams(window.location.search);
+                         var username = urlParams.get('uname');
+
+                         // Make an AJAX request to the Python CGI script to delete the event from the MySQL table
+                         makeAjaxRequest('deleteRequest.py?uname=' + username + '&title=' + encodeURIComponent(title), function(response) {
+                              // Handle the response as needed
+                              // For example, you can display a success message or refresh the event display
+                              alert('Event cancelled successfully!');
+                              // Refresh the event display
+                              changePage('event');
+                         });
+                    }
+               }
+
+          
+               // Function to show the selected sender's message
+               function showMessage(sender) {
+                    // Get the username from the URL query parameter
+                    var urlParams = new URLSearchParams(window.location.search);
+                    var username = urlParams.get('uname');
+               
+                    // Make an AJAX request to the Python CGI script to fetch the selected sender's messages
+                    makeAjaxRequest('new3.py?uname=' + username + '&sender=' + sender, function(response) {
+                    var messages = JSON.parse(response);
+               
+                    // Generate the HTML for the message display
+                    var messageHTML = '<h3>Conversation with: ' + sender + '</h3>';
+                    messageHTML += '<div class="message-box">';
+               
+                    messages.forEach(function(message) {
+                    var messageClass = (message.sender === username) ? 'message-right' : 'message-left';
+                    messageHTML += '<div class="message ' + messageClass + '">';
+                    messageHTML += '<p class="message-content">' + message.content + '</p>';
+
+                    messageHTML += '</div>';
+                    });
+               
+                    messageHTML += '</div>';
+               
+                    // Generate the HTML for the reply box
+                    var replyBoxHTML = '<div class="reply-container"><input type="text" id="replyInput" placeholder="Type Your Message...">';
+                    replyBoxHTML += '<button onclick="sendReply(\'' + sender + '\')"><i class="fas fa-paper-plane"></i></button></div>';
+               
+                    // Combine the message display and reply box HTML
+                    var html = messageHTML + replyBoxHTML;
+               
+                    // Update the message box with the generated HTML
+                    document.getElementById('messageBox').innerHTML = html;
+                    });
+               }
+               
+          
+               // Function to send a reply to the selected sender
+               function sendReply(sender) {
+                    // Get the username from the URL query parameter
+                    var urlParams = new URLSearchParams(window.location.search);
+                    var username = urlParams.get('uname');
+               
+                    // Get the reply input value
+                    var replyInput = document.getElementById('replyInput').value;
+               
+                    // Check if the reply message is empty
+                    if (replyInput.trim() === '') {
+                    alert('Please enter a message.'); // Display an error message
+                    return; // Stop further execution
+                    }
+               
+                    // Make an AJAX request to the Python CGI script to send the reply
+                    makeAjaxRequest('new4.py?uname=' + username + '&sender=' + sender + '&reply=' + replyInput, function(response) {
+                    // Handle the response as needed
+                    // For example, you can display a success message or refresh the message display
+                    var replySentMessage = document.createElement('p');
+                    replySentMessage.innerText = 'Message sent!';
+                    document.getElementById('replyBox').appendChild(replySentMessage);
+                    setTimeout(function() {
+                    replySentMessage.style.display = 'none';
+                    }, 3000);
+                    document.getElementById('replyInput').value = '';
+               
+                    // Refresh the message display
+                    showMessage(sender);
+                    });
+               }
+               
+               /// Get the username from the URL query parameter
+               var urlParams = new URLSearchParams(window.location.search);
+               var username = urlParams.get('uname');
+               
+               // Set the username as the inner text of the username label
+               document.getElementById('usernameLabel').innerText = username;
+               
+               // Function to redirect to test.html and pass the username as a parameter
+               function redirectToTestPage() {
+               window.location.href = 'test.html?uname=' + username;
+               }
+
+               // Function to redirect to displayblog.html and pass the username and blog data as parameters
+               function redirectToDisplayPage(title, content, author, date) {
+                    // Get the username from the URL query parameter
+                    var urlParams = new URLSearchParams(window.location.search);
+                    var uname = urlParams.get('uname');
+                    
+                    // Redirect to displayblog.html with the necessary parameters
+                    window.location.href = 'displayblog.html?uname=' + uname + '&title=' + encodeURIComponent(title) + '&content=' + encodeURIComponent(content) + '&author=' + encodeURIComponent(author) + '&date=' + encodeURIComponent(date);
+                }
+              
+                    
+          
+               // Set the active page as Discover page initially
+               changePage('discover');
+          </script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+   
+     
+     </body>
+</html>

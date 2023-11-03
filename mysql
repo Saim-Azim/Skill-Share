@@ -1,0 +1,69 @@
+/*Mysql Login Password*/
+username: root
+password: Mouli@1234
+========================================================================================================
+========================================================================================================
+/*cmd promt mysql login*/
+
+C:\Users\mbendi>cd C:\Program Files\MySQL\MySQL Server 8.0\bin
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u root -p
+
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>mysql -u root -p
+Enter password: Mouli@1234
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 8.0.34 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql>mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.01 sec)
+
+mysql> create database skillshare;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| skillshare         |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use skillshare;
+Database changed
+
+mysql> CREATE TABLE skillblog (b_id INT AUTO_INCREMENT PRIMARY KEY, b_title VARCHAR(255), category VARCHAR(255),  b_content TEXT, username VARCHAR(255), posted_date DATE DEFAULT (CURDATE()));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> CREATE TABLE login (uid INT AUTO_INCREMENT PRIMARY KEY, uname VARCHAR(255), email VARCHAR(255), password VARCHAR(255));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE messages ( id INT AUTO_INCREMENT PRIMARY KEY, sender VARCHAR(255), recipient VARCHAR(255), message TEXT);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE events (eid INT AUTO_INCREMENT PRIMARY KEY, title VARCHAR(255), receiver VARCHAR(255), e_date DATE, e_time TIME, sender VARCHAR(255));
+Query OK, 0 rows affected (0.03 sec)
+
+
+
